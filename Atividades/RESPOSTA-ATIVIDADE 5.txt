@@ -1,0 +1,220 @@
+1. Crie o script DDL para cada modelo físico de banco de dados.
+
+a)
+   PROJETO                                      
+   +----------------------------------+         GERENTE
+   |numero_projeto INT NOT NULL PK    |         +----------------------------------+
+   +----------------------------------+\        |numero_gerente INT NOT NULL PK    |
+   |nome_projeto VARCHAR(100) NOT NULL|---------+----------------------------------+
+   |data_inicio_projeto DATE          |/        |nome_gerente VARCHAR(100) NOT NULL|
+   |numero_gerente INT NOT NULL FK    |         +----------------------------------+
+   +----------------------------------+ 
+                        |                  
+                        |
+                        | 
+   PROJETO_EMPREGADO   /|\
+   +--------------------------------------------+
+   |numero_projeto INT NOT NULL PFK             |
+   |numero_empregado INT NOT NULL PFK           |
+   +--------------------------------------------+
+   |horas_trabalhadas_projeto SMALLINT DEFAULT 0|
+   +--------------------------------------------+
+                  \|/
+                   |
+                   |
+   EMPREGADO       |
+   +------------------------------------+         DEPARTAMENTO
+   |numero_empregado INT NOT NULL PK    |         +--------------------------------+
+   +------------------------------------+\        |numero_depto INT NOT NULL PK    |
+   |nome_empregado VARCHAR(100) NOT NULL|---------+--------------------------------+
+   |numero_depto INT FK                 |/        |nome_depto VARCHAR(100) NOT NULL|
+   +------------------------------------+         +--------------------------------+
+
+	RESPOSTA:
+
+ 
+		CREATE TABLE GERENTE( numero_gerente INTEGER NOT NULL, nome_gerente VARCHAR(100) NOT NULL,
+		PRIMARY KEY(numero_gerente));
+		
+		CREATE TABLE DEPARTAMENTO(numero_depto INTEGER NOT NULL, nome_depto VARCHAR(100) NOT NULL,
+		PRIMARY KEY(numero_depto));
+
+		CREATE TABLE EMPREGADO(numero_empregado INTEGER NOT NULL, nome_emregado VARCHAR(100) NOT NULL,
+		PRIMARY KEY(numero_depto));
+
+		CREATE TABLE EMPREGADO(numero_depto)
+b)
+   PEDIDO                                      
+   +----------------------------------------+         FORNECEDOR
+   |cod_pedido INT NOT NULL AI PK           |         +------------------------------------+
+   +----------------------------------------+\        |cod_fornecedor INT NOT NULL AI PK   |
+   |dat_emissao DATE NOT NULL               |---------+------------------------------------+
+   |cod_fornecedor INT NOT NULL FK          |/        |nom_fornecedor VARCHAR(100) NOT NULL|
+   |vlr_total_pedido DECIMAL(12,2) DEFAULT 0|         |end_fornecedor VARCHAR(100)         |
+   +----------------------------------------+         +------------------------------------+ 
+                        |                  
+                        |
+                        | 
+   PEDIDO_MATERIAL     /|\
+   +-----------------------------------------+
+   |cod_pedido INT NOT NULL PFK              |
+   |cod_material INT NOT NULL PFK            |
+   +-----------------------------------------+
+   |qtde_material SMALLINT NOT NULL CHECK > 0|
+   |vlr_material DECIMAL(12,2) NOT NULL      | 
+   +-----------------------------------------+
+                  \|/
+                   |
+                   |
+   MATERIAL        |
+   +-----------------------------------+
+   |cod_material INT NOT NULL AI PK    |
+   +-----------------------------------+
+   |dsc_material VARCHAR(100) NOT NULL |
+   |vlr_unitario DECIMAL(12,2) NOT NULL|            
+   +-----------------------------------+
+
+
+	RESPOSTA:
+	
+   	CREAT TABLE FORNECEDOR(cod_fornecedor INTERGER NOT NULL,nome_fonecedor VARCHAR(100)
+	NOT NULL,end_fornecedor VARCHAR(100)PRIMARY KEY(cod_fornecedor));
+
+	CREAT TABLE MATERIAL(cod_material INTERGER NOT NULL,dsc_material VARCHAR(100) 
+	NOT NULL,vlr_unitario DECIMAL(12,2)NOT NULL PRIMARY KEY(cod_material);
+
+	CREAR TABLE PEDIDO(cod_pedido INTERGER NOT NULL,dat_emissão DATE NOT NULL,cod_fornecedor INTERGER NOT NULL,cod_fornecedor 
+	INTERGER NOT FULL FOREIGN KEY,vlr_total_pedido DECIMAL(12,2) DEFAULT 0 PRIMARY KEY(cod_pedido));
+
+	CREAT TABLE PEDIDO_MATERIAL(cod_pedido INTERGER NOT NULL PRIMARY FOREIGN KEY,cod_material INTERGER NOT NULL PRIMARY 
+	FOREIGN KEY,qtde_material VARCHAR(100) NOT NULL,vlr_unitario DECIMAL(12,2) NOT NULL(cod_pedido));
+
+
+
+c)
+   CURSO                                      
+   +--------------------------------+
+   |id_curso INT AI PK              |
+   +--------------------------------+
+   |nome_curso VARCHAR(100) NOT NULL| 
+   |carga_horaria SMALLINT          |
+   +--------------------------------+ 
+                |                  
+                |
+                | 
+   TURMA       /|\
+   +----------------------------+
+   |id_turma INT NOT NULL AI PK |
+   +----------------------------+
+   |id_curso INT NOT NULL FK    |
+   |id_aluno INT NOT NULL FK    |
+   |data_matricula DATE NOT NULL| 
+   +----------------------------+
+               \|/
+                |
+                |
+   ALUNO        |
+   +--------------------------------+
+   |id_aluno INT NOT NULL AI PK     |
+   +--------------------------------+
+   |nome_aluno VARCHAR(100) NOT NULL|
+   |email_aluno VARCHAR(100)        |
+   |fone_contato CHAR(14)           |
+   +--------------------------------+
+
+	RESPOSTA:
+
+	CREAT TABLE ALUNO(id_aluno INTERGER NOT NULL AI,nome_aluno VARCHAR(100) NOT NULL,email_aluno VARCHAR(100), 
+	fone_contato CHAR(14) PRIMARY KEY(id_aluno);
+
+  	CREAT TABLE CURSO(id_curso INTERGER AI,nome_curso VARCHAR(100) NOT NULL,carga_horaria SMALLINT PRIMARY KEY(id_aluno));
+
+  	CREAT TABLE TURMA(id_turma INTERGER NOT NULL AI,nome_aluno VARCHAR(100) NOT NULL,email_aluno VARCHAR(100), 
+	fone_contato CHAR(14) PRIMARY KEY(id_turma));
+
+d)
+   MEDICO                                      
+   +---------------------------------+        ESPECIALIDADE
+   |cod_medico INT AI PK             |        +---------------------------------------+
+   +---------------------------------+\       |cod_especialidade INT NOT NULL PK      |
+   |nome_medico VARCHAR(100) NOT NULL|--------+---------------------------------------+ 
+   |cod_especialidade INT NOT NULL FK|/       |dsc_especialidade VARCHAR(100) NOT NULL| 
+   +---------------------------------+        +---------------------------------------+
+                |                  
+                |
+                | 
+   CONSULTA    /|\
+   +------------------------------+
+   |id_consulta INT NOT NULL AI PK|
+   +------------------------------+
+   |id_medico INT NOT NULL FK     |
+   |id_paciente INT NOT NULL FK   |
+   |data_consulta DATE NOT NULL   | 
+   +------------------------------+
+               \|/
+                |
+                |
+   PACIENTE     |
+   +-----------------------------------+
+   |id_paciente INT NOT NULL AI PK     |
+   +-----------------------------------+
+   |nome_paciente VARCHAR(100) NOT NULL|
+   +-----------------------------------+
+
+	RESPOSTA:
+
+	CREAT TABLE ESPECIALIDADE(cod_especialidade INTERGER NOT NULL,dsc_especialidade VARCHAR(100) NOT NULL,PRIMATY KEY(cod_especialidade);
+
+	CREAT TABLE PACIENTE(id_paciente INTERGER NOT FULL AI,nome_paciente VARCHAR(100) NOT FULL,PRIMARY KEY(id_paciente));
+
+	CREAT TABLE MEDICO(cod_medico INTERGER AI,nome_medico VARCHAR(100) NOT NULL,cod_especialidade INTERGER NOT NULL FOREIGN KEY,PRIMARY KEY(cod_medico);
+
+	CREAT TABLE CONSULTA(id_consulta INTERGER NOT NULL AI,id_medico INTERGER NOT NULL FOREIGN KEY,id_medico INTERGER NOT NUL FOREIGN KEY,id_paciente 
+	INTERGER NOT NULL FOREIGN KEY,data_consulta DATE NOT NULL PRIMARY KEY(id_consulta));
+
+e)
+   LIVRO                                      
+   +---------------------------------+        EDITORA
+   |id_livro INT AI PK               |        +---------------------------------+
+   +---------------------------------+\       |cod_editora INT NOT NULL AI PK   |
+   |num_isbn CHAR(13) NOT NULL UNIQUE|--------+---------------------------------+ 
+   |tit_livro VARCHAR(100) NOT NULL  |/       |nom_editora VARCHAR(100) NOT NULL| 
+   |num_paginas SMALLINT CHECK > 0   |        +---------------------------------+
+   |cod_editora INT NOT NULL FK      |
+   +---------------------------------+        
+                |                  
+                |
+                | 
+   EMPRESTIMO  /|\
+   +---------------------------------+
+   |id_emprestimo INT NOT NULL AI PK |
+   +---------------------------------+
+   |id_livro INT NOT NULL FK         |
+   |id_aluno INT NOT NULL FK         |
+   |dat_emprestimo DATE NOT NULL     | 
+   |dat_devolucao DATE               | 
+   +---------------------------------+
+               \|/
+                |
+                |
+   ALUNO        |
+   +---------------------------------+
+   |id_aluno INT NOT NULL AI PK      |
+   +---------------------------------+
+   |num_matricula INT NOT NULL UNIQUE|
+   |nom_aluno VARCHAR(100) NOT NULL  |
+   +---------------------------------+
+
+	RESPOSTA:
+
+  	CREAT TABLE EDITORA(cod_editora INTERGER NOT NULL AI ,nom_editora VARCHAR(100) NOT NULL PRIMARY KEY(cod_editora));
+
+ 	CREAT TABLE ALUNO(id_aluno INTERGER NOT NULL AI,num_matricula INTERGER NOT NULL UNIQUE,nome_aluno VARCHAR(100)NOT NULL PRIMARY KEY(id_aluno));
+
+  	CREAT TABLE LIVRO(id_livro INTERGER AI ,num_isbn CHAR(13) NOT NULL UNIQUE,tit_livro VARCHAR(100) NOT NULL,num_paginas SMALLINT CHECK >0,cod_editora 
+	INT NOT NULL FOREIGN KEY PRIMARY KEY(id_livro));
+
+  	CREAT TABLE EMPRESTIMO(id_emprestimo INT NOT NULL AI,id_livro INT NOT NULL FOREIGN KEY,id_aluno INTERGER NOT NULL FOREIGN KEY,dat_emprestimo DATE 
+	NOT NULL,data_devolução DATE PRIMARY KEY));
+
+	
