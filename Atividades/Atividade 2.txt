@@ -1,0 +1,68 @@
+1. Resolva as consultas em Álgebra Relacional para o seguinte modelo de dados.
+
+Aluno (id_aluno*, nome_aluno)
+Disciplina (id_disciplina*, nome_disciplina, carga_horaria)
+Professor (id_professor*, nome_professor, titulacao_professor)
+Turma (id_turma*, num_periodo, id_disciplina, id_professor, horario_aula, num_sala)
+Historico (id_historico*, id_turma, id_aluno, num_faltas, media_final)
+
+a) Forneça nome e titulação dos professores.
+
+	RESPOSTA:
+
+	PI nome_professor, titulacao_professor (Professor)
+
+b) Forneça id, número de faltas e a média final dos alunos matriculados em 20042 na turma 1 da disciplina ADS025.
+
+	RESPOSTA:
+
+	PI id_aluno, num_faltas, media_final (SIGMA turma=1 (Historico))
+
+c) Encontre a sala ocupada pela disciplina ADS025 em cada período que foi oferecida. 
+
+	RESPOSTA:
+
+	PI num_periodo, num_sala (SIGMA id_disciplina = ADS025 (Turma))
+
+d) Localize os alunos que tiveram aula com o professor 3056 em algum período. 
+
+	RESPOSTA:
+
+	PI id_aluno (Historico JUNCAO (SIGMA id_professor = 3056 (Turma))
+
+e) Forneça histórico escolar do aluno 199839550, contendo nome do aluno, período, nome da disciplina, freqüência e nota.
+
+	RESPOSTA:
+
+	PI aluno.nome_aluno, turma.id_periodo, disciplina.nome_disciplina.historico_num_faltas, historico_media_final
+          (((SIGMA id_aluno = 199839550 (Historico) JUNCAO Aluno) JUNCAO Turma) JUNCAO Disciplina)
+
+f) Forneça os alunos que não possuem nota na disciplina ADS025.
+
+	RESPOSTA:
+
+	PI id_aluno,nome_aluno,id_disciplina,nome_disciplina,media_final(sigma Disciplina=ADS025,media_final= 0 V null (historico))
+
+g) Encontre as turmas do professor 3056 e do aluno 199839550.
+
+	RESPOSTA:
+
+	PI id_professor,id_aluno (PI)id_turma,id_professor,id_aluno(sigma id_professor=3056,id_aluno=199839550(turma))
+
+h) Encontre as disciplinas que não foram ministras pelo professor 3056.
+
+	RESPOSTA:
+
+	PI id_professor (PI)id_discplina,id_professor(sigma id_professor-3056(turma))
+
+i) Encontre o nome dos alunos que cursaram todas as disciplinas.
+
+	RESPOTA:
+
+	PI id_aluno,nome_aluno(alunos)X(PI)id_disciplina, nome_disciplina(disciplina)
+
+j) Encontre os alunos que não foram reprovados (frequencia < 75% ou nota < 5) em nenhuma disciplina.
+
+	RESPOSTA:
+
+	PI id_aluno,num_faltas, media_final(sigma id_historico, frequencia > 75% V nota > 5 (historico))
