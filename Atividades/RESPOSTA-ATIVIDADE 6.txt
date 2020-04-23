@@ -1,0 +1,231 @@
+1. Crie um banco de dados chamado academico no MySQL Workbench a partir do seguinte sript DDL.
+
+CREATE TABLE aluno(
+  id_aluno INT NOT NULL,
+  nome_aluno VARCHAR(100) NOT NULL,
+  PRIMARY KEY(id_aluno)
+);
+
+CREATE TABLE disciplina(
+  id_disciplina INT NOT NULL,
+  nome_disciplina VARCHAR(100) NOT NULL,
+  carga_horaria INT CHECK(carga_horaria > 0),
+  PRIMARY KEY(id_disciplina)
+);
+
+CREATE TABLE professor(
+  id_professor INT NOT NULL,
+  nome_professor VARCHAR(100) NOT NULL,
+  titulacao_professor VARCHAR(50) NOT NULL,
+  PRIMARY KEY(id_professor)
+);
+
+CREATE TABLE turma(
+  id_turma INT NOT NULL,
+  num_periodo INT NOT NULL,
+  id_professor INT,
+  id_disciplina INT,
+  horario_aula VARCHAR(10),
+  num_sala VARCHAR(10),
+  PRIMARY KEY(id_turma),
+  FOREIGN KEY(id_professor) REFERENCES professor(id_professor) ON DELETE CASCADE,
+  FOREIGN KEY(id_disciplina) REFERENCES disciplina(id_disciplina)
+);
+
+CREATE TABLE historico(
+  id_historico INT NOT NULL,
+  id_turma INT NOT NULL,
+  id_aluno INT NOT NULL,
+  num_faltas SMALLINT,
+  media_final DECIMAL(3,1),
+  PRIMARY KEY(id_historico),
+  FOREIGN KEY(id_turma) REFERENCES turma(id_turma) ON DELETE CASCADE,
+  FOREIGN KEY(id_aluno) REFERENCES aluno(id_aluno)
+);
+
+
+2. Elabore os comandos DML em um banco de dados.
+
+b) Insira um registro na tabela aluno preechendo somente a coluna id_aluno com o valor 1. Qual foi o resultado?
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0054 segundos.)
+INSERT INTO `aluno`(`id_aluno`) VALUES (1)
+
+c) Insira os seguintes registros na tabela aluno.
+
+id_aluno        nome_aluno
+1               JOSE
+2               MARIA
+3               BRUNO
+4               CARLA
+5               PEDRO
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0054 segundos.)
+INSERT INTO `aluno`(`id_aluno`, `nome_aluno`) VALUES (1,'JOSE')
+1 linha inserida. (A consulta demorou 0,0033 segundos.)
+INSERT INTO `aluno`(`id_aluno`, `nome_aluno`) VALUES (2,'MARIA')
+1 linha inserida. (A consulta demorou 0,0027 segundos.)
+INSERT INTO `aluno`(`id_aluno`, `nome_aluno`) VALUES (3,'BRUNO')
+1 linha inserida. (A consulta demorou 0,0022 segundos.)
+INSERT INTO `aluno`(`id_aluno`, `nome_aluno`) VALUES (4,'CARLA')
+1 linha inserida. (A consulta demorou 0,0021 segundos.)
+INSERT INTO `aluno`(`id_aluno`, `nome_aluno`) VALUES (5,'PEDRO')
+
+d) Insira um registro na tabela disciplina com os valores 1 para id_disciplina, BANCO DE DADOS I para nome_disciplina e -1 para carga_horaria. Qual foi o resultado?
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0070 segundos.)
+INSERT INTO `disciplina`(`id_disciplina`, `nome_disciplina`, `carga_horaria`) VALUES (1,'BANCO DE DOS',-1)
+
+e) Insira os seguintes registros na tabela disciplina.
+
+id_disciplina    nome_disciplina     carga_horaria
+1                BANCO DE DADOS I    60
+2                BANCO DE DADOS II   60
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0052 segundos.)
+INSERT INTO `disciplina`(`id_disciplina`, `nome_disciplina`, `carga_horaria`) VALUES (1,'BANCO DE DADOS I',60)
+1 linha inserida. (A consulta demorou 0,0023 segundos.)
+INSERT INTO `disciplina`(`id_disciplina`, `nome_disciplina`, `carga_horaria`) VALUES (2,'BANCO DE DADOS II',60)
+
+f) Insira os seguintes resgistros na tabela professor.
+id_professor   nome_professor
+1              LETICIA
+2              JOSE REGINALDO
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0051 segundos.)
+INSERT INTO `professor`(`id_professor`, `nome_professor`) VALUES (1,'LETICIA')
+Warning: #1364 Field 'titulacao_professor' doesn't have a default value
+1 linha inserida. (A consulta demorou 0,0029 segundos.)
+INSERT INTO `professor`(`id_professor`, `nome_professor`) VALUES (2,'REGINALDO')
+
+g) Insira um registro na tabela turma com os valores 1 para id_turma, 20192 para num_periodo. Qual foi o resultado?
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0053 segundos.)
+INSERT INTO `turma`(`id_turma`, `num_periodo`) VALUES (1,20192)
+
+h) Insira um registro na tabela turma com os valores 1 para id_turma, 20201 para num_periodo. Qual foi o resultado?
+
+	RESPOSTA:
+
+Erro
+Comando SQL: Copiar
+
+
+INSERT INTO `turma`(`id_turma`, `num_periodo`) VALUES (1,20201)
+Mensagens do MySQL : Documentação
+
+#1062 - Entrada '1' duplicada para a chave 'PRIMARY'
+
+i) Insira um registro na tabela turma com os valores 2 para id_turma, 20201 para num_periodo e 3 para id_professor. Qual foi o resultado?
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0054 segundos.)
+INSERT INTO `turma`(`id_turma`, `num_periodo`, `id_professor`) VALUES (2,20201,3)
+
+j) Insira os registros na tabela turma.
+
+id_turma   num_periodo   id_professor  id_disciplina
+3          20201         1             1
+4          20202         2             2
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0069 segundos.)
+INSERT INTO `turma`(`id_turma`, `num_periodo`, `id_professor`, `id_disciplina`) VALUES (3,20201,1,1)
+1 linha inserida. (A consulta demorou 0,0021 segundos.)
+INSERT INTO `turma`(`id_turma`, `num_periodo`, `id_professor`, `id_disciplina`) VALUES (4,20201,2,2)
+
+k) Insira os registros na tabela historico.
+
+id_historico    id_turma   id_aluno
+1               1          1
+2               1          2
+3               1          3
+4               1          4
+5               3          1
+6               3          2
+7               4          3
+8               4          4
+
+	RESPOSTA:
+
+1 linha inserida. (A consulta demorou 0,0054 segundos.)
+INSERT INTO `historico`(`id_historico`, `id_turma`, `id_aluno`) VALUES (1,1,1)
+1 linha inserida. (A consulta demorou 0,0033 segundos.)
+INSERT INTO `historico`(`id_historico`, `id_turma`, `id_aluno`) VALUES (2,1,2)
+1 linha inserida. (A consulta demorou 0,0027 segundos.)
+INSERT INTO `historico`(`id_historico`, `id_turma`, `id_aluno`) VALUES (3,1,3)
+1 linha inserida. (A consulta demorou 0,0022 segundos.)
+INSERT INTO `historico`(`id_historico`, `id_turma`, `id_aluno`) VALUES (4,1,4)
+1 linha inserida. (A consulta demorou 0,0021 segundos.)
+INSERT INTO `historico`(`id_historico`, `id_turma`, `id_aluno`) VALUES (5,3,1)
+1 linha inserida. (A consulta demorou 0,0021 segundos.)
+INSERT INTO `historico`(`id_historico`, `id_turma`, `id_aluno`) VALUES (6,3,2)
+1 linha inserida. (A consulta demorou 0,0021 segundos.)
+INSERT INTO `historico`(`id_historico`, `id_turma`, `id_aluno`) VALUES (7,4,3)
+1 linha inserida. (A consulta demorou 0,0021 segundos.)
+INSERT INTO `historico`(`id_historico`, `id_turma`, `id_aluno`) VALUES (8,4,4)
+	   
+l) Altere o nome do aluno JOSE para JOAO.
+
+	RESPOSTA:
+
+1 linha afectada. (A consulta demorou 0,0059 segundos.)
+UPDATE `aluno` SET `nome_aluno`='JOAO' WHERE id_aluno = 1
+
+m) Altere o id_disciplina de BANCO DE DADOS I para o valor 3. Qual foi o resultado?
+
+	RESPOSTA:
+
+Erro
+Comando SQL: Copiar
+
+
+UPDATE `disciplina` SET `id_disciplina`=3 WHERE nome_disciplina= 'BANCO DE DADOS I'
+Mensagens do MySQL : Documentação
+
+#1451 - Cannot delete or update a parent row: a foreign key constraint fails (`academico`.`turma`, CONSTRAINT `turma_ibfk_2` FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`id_disciplina`))
+
+n) Altere a media_final dos alunos que estão na turma de BANCO DE DADOS II para 5.
+
+	RESPOSTA:
+
+Erro
+Comando SQL: Copiar
+
+
+UPDATE `disciplina` SET `media_final`=5 WHERE id_disciplina= 2
+Mensagens do MySQL : Documentação
+
+#1054 - Coluna 'media_final' desconhecida em 'field list'
+
+o) Exclua o aluno PEDRO. Qual foi o resultado?
+
+	RESPOSTA:
+
+1 linha afectada. (A consulta demorou 0,0059 segundos.)
+
+p) Exclua a disciplina BANCO DE DADOS II. Qual foi o resultado?
+
+	RESPOSTA:
+
+#1451 - Cannot delete or update a parent row: a foreign key constraint fails (`academico`.`turma`, CONSTRAINT `turma_ibfk_2` FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`id_disciplina`))
+
+q) Exclua o professor JOSE REGINALDO. Qual foi o resultado?
+
+	RESPOSTA:
+
+A mostrar registos de 0 -  1 (2 total, A consulta demorou 0,0011 segundos.)
