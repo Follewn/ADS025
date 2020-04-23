@@ -1,0 +1,94 @@
+1. Resolver as consultas a seguir usando a linguagem DQL.
+
+a) Forneça nome dos professores.
+
+	RESPOSTA:
+
+	RESPOSTA: SELECT `nome_professor` FROM `professor
+
+b) Liste os alunos cujo nome terminam em A.
+
+	RESPOSTA:
+
+	SELECT * FROM `aluno` WHERE `nome_aluno` LIKE '%A'
+
+c) Forneça chave primária, número de faltas e media final dos alunos matriculados na turma 1.
+
+	RESPOSTA:
+
+	SELECT aluno.id_aluno, hist.num_faltas, hist.media_final FROM aluno, 
+	historico hist
+	WHERE aluno.id_aluno = hist.id_aluno
+	AND hist.id_turma = 1
+
+
+d) Forneça chave primária dos alunos que não possuem media final na disciplina 1.
+
+	RESPOSTA:
+
+	SELECT aluno.id_aluno FROM aluno, historico hist, disciplina disci,turma tur
+	WHERE aluno.id_aluno = hist.id_aluno
+	AND hist.id_turma = tur.id_turma
+	AND tur.id_disciplina = disci.id_disciplina
+	AND hist.media_final IS NULL
+	AND disci.id_disciplina = 1
+
+e) Encontre chave primaria e nome do alunos que não foram reprovados (num_faltas < 75% ou nota < 5) em alguma disciplina.
+
+	RESPOSTA:
+
+	SELECT aluno.id_aluno, aluno.nome_aluno, disciplina.nome_disciplina FROM aluno, historico, turma
+	WHERE aluno.id_aluno = historico.id_aluno
+	AND historico.id_turma = turma.id_disciplina
+	AND historico.num_faltas > 75%
+	AND historico.media_final > 5
+
+
+f) Liste, em ordem alfabética, os alunos que tiveram aula com o professor JOSE REGINALDO.
+
+	RESPOSTA:
+
+	SELECT aluno.nome_aluno FROM aluno, historico, turma, professor
+	WHERE aluno.id_aluno = historico.id_aluno
+	AND historico.id_turma = turma.id_turma
+	AND turma.id_professor = professor.id_professor
+	AND professor.nome_professor = 'JOSE REGINALDO'
+	ORDER BY aluno.nome_aluno ASC
+
+g) Encontre as disciplinas que não foram ministradas pela professora LETICIA.
+
+	RESPOSTA:
+
+	SELECT disciplina.nome_disciplina FROM disciplina, turma, professor
+	WHERE disciplina.id_disciplina = turma.id_disciplina
+	AND turma.id_professor = professor.id_professor
+	AND professor.nome_professor = 'JOSE REGINALDO'
+
+
+h) Calcule a média geral de cada turma.
+
+	RESPOSTA:
+
+	SELECT turma.id_turma, SUM(historico.media_final) FROM turma, historico
+	WHERE turma.id_turma = historico.id_turma
+
+i) Quantos alunos matriculados na disciplina de BANCO DE DADOS I em cada período.
+
+	RESPOSTA: 
+
+	SELECT turma.num_periodo, COUNT(aluno.nome_aluno) FROM aluno, historico, turma, disciplina
+	WHERE aluno.id_aluno = historico.id_aluno
+	AND historico.id_turma = turma.id_turma
+	AND turma.id_disciplina = disciplina.id_disciplina
+	AND disciplina.id_disciplina = 1
+
+
+j) Encontre o nome dos alunos que cursaram todas as disciplinas.
+
+	RESPOSTA:
+
+	SELECT aluno.nome_aluno FROM aluno, historico, turma, disciplina
+	WHERE aluno.id_aluno = historico.id_aluno
+	AND historico.id_turma = turma.id_turma
+	AND turma.id_disciplina = disciplina.id_disciplina
+	AND disciplina.id_disciplina in ('1'&'2')
