@@ -1,0 +1,66 @@
+1. Crie o modelo NoSQL chave-valor para os seguintes modelos relacionais.
+
+a) 
+Projeto (numero_projeto*, nome_projeto, data_inicio_projeto, numero_gerente)
+Projeto_Empregado (numero_projeto*, numero_empregado*, horas_trabalhadas_projeto)
+Empregado (numero_empregado*, nome_empregado, numero_depto)
+Gerente (numero_gerente*, nome_gerente)
+Departamento (numero_depto*, nome_depto)
+
+	RESPOSTA:
+
+{id: “1”, projeto: {numero_projeto: 00, nome_projeto: “spacex”, data_inicio_projeto: “06/05/2002”, numero_gerente: 01234}}
+{id: “2”, projeto_empregado: {numero_projeto:  00, numero_empregado: 12345, horas_trabalhadas_projeto: “12:00h”}}
+{id: “3”, empregado: {numero_empregado: 12346, nome_empregado: “Bill”, numero_depto: 555555}}
+{id: “4”, gerente: {numero_gerente: 01234, nome_gerente: “leonardo” }}
+{id: “5”, departamento {numero_depto: 54589, nome_depto: “comunicação”, nome_gerente: “Steave” }}
+
+b)
+Pedido (cod_pedido*, dat_emissao, cod_fornecedor, vlr_total_pedido)
+Pedido_Material (cod_pedido*, cod_material*, qtd_pedido, vlr_total_material)
+Material (cod_material*, dsc_material, vlr_unitario),
+Fornecedor (cod_fornecedor*, nom_fornecedor, end_fornecedor)
+
+	RESPOSTA:
+
+{id:”1”, pedido: {cod_pedido: 01254, dat_emissao: “09/06/2020”, cod_fornecedor: 2135, vlr_total_pedido: “155,55” }}
+{id:”2”, pedido_material: {cod_pedido:  6482, cod_material: 44433, qtd_pedido: 2442, vlr_total_material: “400,99” }}
+{id:”3”, matérial: {cod_material: 44433, dsc_material: “15%”, vlr_unitario: “45,99” }}
+{id:”4”, fornecedor: {cod_fornecedor:  2135, nome_fornecedor: “Jão”, end_fornecedor: “QNP15 conjunto A casa 25“}}
+
+c)
+Turma (codigo_aluno*, cod_curso*, data_matricula)
+Aluno (codigo_aluno*, nome_aluno, email_aluno, fone_contato)
+Curso (cod_curso*, nome_curso)
+
+	RESPOSTA:
+
+{id: "1", turma: {codigo_aluno: 001, codigo_curso: 0123, data_matricula: "02/03/2020"}}
+{id: "2", aluno: {codigo_aluno: 001, nome_aluno: "follewn", email_aluno: "follewn@gmail.com", fone_contato: "9999-5555"}}
+{id: "3", curso: { codigo_curso: 0123, nome_aluno: "Leonardo"}}
+
+d)
+Consulta (num_paciente*,  data_consulta*, cod_medico*, dsc_diagnostico)
+Paciente (num_paciente*, nome_paciente)
+Medico (cod_medico*, nome_medico, cod_especialidade)
+Especialidade (cod_especialidade*, dsc_especialidade)
+
+	RESPOSTA:
+
+{id: “1”, consulta: {num_paciente: 666, data_consulta: “06/06/2006”, cod_medico: 08554, dsc_diagnostico: “hipertensão” }}
+{id: “2”, paciente: {num_paciente: 666, nome_paciente: “Jazon” }}
+{id: “3”, medico: {cod_medico: 08554, nome_medico: “House”, cod_especialidade: 245678}}
+{id: “4”, especialidade: (cod_especialidade: 333666, dsc_especialidade: “cardiologista” }}
+
+e)
+Emprestimo (num_matricula*, num_isbn*, dat_emprestimo*, dat_devolucao)
+Aluno (num_matricula*, nom_aluno)
+Livro (num_isbn*, tit_livro, num_paginas, cod_editora)
+Editora (cod_editora*, nom_editora)
+
+	RESPOSTA:
+
+{id: “1”, empréstimo: {num_matricula: 00458, num_isbn: 1515, dat_emprestimo: “11/08/2001”, dat_devolucao: “15/08/2001” }}
+{id: “2”, aluno: {num_matricula: 152435, nom_aluno: “Dustin” }}
+{id: “3”, livro (num_isbn: 12150, tit_livro: “Stephen Hawking Uma breve hisótria no tempo”, num_paginas: 526, cod_editora: 34526}}
+{id: “4”, Editora (cod_editora: 34526, nom_editora: “Bantam books” }}
