@@ -1,0 +1,55 @@
+1. Resolver as consultas a seguir usando MongoDB.
+
+a) Forneça nome dos professores.
+
+	RESPOSTA:
+
+db.professor.find({}, {nome: true, _id: false});
+
+b) Liste os alunos cujo nome terminam em A.
+
+	RESPOSTA:
+
+db.aluno.find({nome: /a$/i});
+
+c) Forneça chave primária, número de faltas e media final dos alunos matriculados na turma 1.
+
+	RESPOSTA:
+
+db.historico.find({idTurma: 1},{idAluno: true, numFaltas: true, mediaFinal: true})
+
+d) Forneça chave primária dos alunos que não possuem media final na disciplina 1.
+
+	RESPOSTA:
+
+db.historico.find({mediaFinal: null, idDisciplina: 1}, {idAluno: true}
+
+e) Encontre nome do alunos que não foram reprovados (num_faltas < 75% ou nota < 5) em alguma disciplina.
+
+	RESPOSTA:
+
+db.historico.find({ $or: [{ numFalta: {$lt: 75}}, { nota: {$lt: 5}}]});
+
+f) Liste, em ordem alfabética, os alunos que tiveram aula com o professor JOSE REGINALDO.
+
+	RESPOSTA:
+
+db.historico.find({idProfessor: 2}, {idAluno: true, nome: true}).sort({nome: true})
+
+g) Encontre as disciplinas que não foram ministradas pela professora LETICIA.
+
+	RESPOSTA:
+
+db.disciplina.find({idProfessor: 1}. distinct({nome})
+
+h) Calcule a média geral de cada turma.
+
+	RESPOSTA:
+
+db.historico.aggregate([{$group: {idTurma: {$avg: mediaFinal}}}])
+
+i) Quantos alunos matriculados na disciplina de BANCO DE DADOS I em cada período.
+
+	RESPOSTA:
+
+db.historico.aggregare([{$match: {idDisciplina: 1}}, {$group: {numPeriodo{$count: idAlunos}}}])

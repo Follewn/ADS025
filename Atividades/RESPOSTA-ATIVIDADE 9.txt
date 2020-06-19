@@ -1,0 +1,84 @@
+1. Crie o modelo NoSQL orientado a colunas para os seguintes modelos relacionais.
+
+a) 
+Projeto (numero_projeto*, nome_projeto, data_inicio_projeto, numero_gerente)
+Projeto_Empregado (numero_projeto*, numero_empregado*, horas_trabalhadas_projeto)
+Empregado (numero_empregado*, nome_empregado, numero_depto)
+Gerente (numero_gerente*, nome_gerente)
+Departamento (numero_depto*, nome_depto)
+
+	RESPOSTA:
+
+projeto
+{id: “1”, tipo: “projeto”, valor: {numero_projeto: 000000, nome_projeto: “AAAAAA”, data_inicio_projeto: “10/09/2008”, numero_gerente: 2222}}
+projeto_empregado
+{id: “2”, tipo: “projeto_empregado”, valor: {numero_projeto: 000000, numero_empregado: 4444, horas_trabalhadas_projeto: “48h”}}
+empregado
+{id: “3”, tipo: “empregado”, valor: {numero_empregado: 4444, nome_empregado: “BBBBBB”, numero_depto: 555555}}
+gerente
+{id: “4”, tipo: “gerente”, valor: {numero_gerente: 2222, nome_gerente: “CCCCCCC”}}
+departamento
+{id: “5”, tipo: “departamento”, valor: {numero_depto: 555555, nome_depto: “DDDDDD”}}
+
+
+b)
+Pedido (cod_pedido*, dat_emissao, cod_fornecedor, vlr_total_pedido)
+Pedido_Material (cod_pedido*, cod_material*, qtd_pedido, vlr_total_material)
+Material (cod_material*, dsc_material, vlr_unitario),
+Fornecedor (cod_fornecedor*, nom_fornecedor, end_fornecedor)
+
+	REPOSTA:
+
+Pedido
+{id: “1”, tipo: “pedido”, valor: {cod_pedido: 000000, dat_emissao: “05/08/2014”, cod_fornecedor: 2222, vlr_total_pedido: “480,95”}}
+pedido_material
+{id: “2”, tipo: “pedido_material”, valor: {cod_pedido: 000000, cod_material: 4444, qtd_pedido: 512, vlr_total_material: “328,53”}}
+material
+{id “3”, tipo: “material”, valor: {cod_material: 4444, dsc_material: “CCCCCCC”, vlr_unitario: “25,80}}
+fornecedor
+{id  “4”, tipo: “fornecedor”, valor: {cod_fornecedor: 2222, nom_fornecedor: “AAAAAA”, end_fornecedor: “DDDDDD”}}
+
+c)
+Turma (codigo_aluno*, cod_curso*, data_matricula)
+Aluno (codigo_aluno*, nome_aluno, email_aluno, fone_contato)
+Curso (cod_curso*, nome_curso)
+
+	REPOSTA:
+
+Turma
+{id: "1", tipo: "turma", valor: {codigo_aluno: 000000, codigo_curso: 2222, data_matricula: "06/01/1961"}}
+aluno
+{id: "2", tipo: "aluno", valor : {codigo_aluno: 000000, nome_aluno: " AAAAAA", email_aluno: "aaaaa@com", fone_contato: "9999-9999"}}
+curso
+{id: "3", tipo: "curso", valor : {codigo_curso: 2222, nome_curso: " CCCCCCC",}}
+
+d)
+Consulta (num_paciente*,  data_consulta*, cod_medico*, dsc_diagnostico)
+Paciente (num_paciente*, nome_paciente)
+Medico (cod_medico*, nome_medico, cod_especialidade)
+Especialidade (cod_especialidade*, dsc_especialidade)
+
+	RESPOSTA:
+consulta
+{id: "1", tipo: "consulta", valor: {num_paciente: 000000, data_ consulta: “11/08/2001”, cod_medico: 2222, dsc_diagnostico: “CCCCCCC”}}
+paciente
+{id: "2", tipo: "paciente", valor: {num_paciente: 000000, nome_paciente: “AAAAAA”}}
+medico
+{id: "2", tipo: "medico", valor: {cod_medico: 2222, nome_medico: “DDDDDD”, cod_especialidade: 4444}}
+especialidade
+{id: "2", tipo: "especialidade", valor: {cod_especialidade: 4444, dsc_especialidade: “BBBBBB” }}
+
+e)
+Emprestimo (num_matricula*, num_isbn*, dat_emprestimo*, dat_devolucao)
+Aluno (num_matricula*, nom_aluno)
+Livro (num_isbn*, tit_livro, num_paginas, cod_editora)
+Editora (cod_editora*, nom_editora)
+
+	RESPOSTA:
+
+aluno
+{id: "1", tipo: "aluno", valor: {num_matricula: 00000, nom_aluno: “AAAAAA”}}
+livro
+{id: "1", tipo: "livro", valor: { num_isbn: 2222, tit_livro: “DDDDDD”, num_paginas: 888, cod_editora: 4444}}
+editora
+{id: "1", tipo: "editora", valor: {cod_editora: 4444, nom_editora: “CCCCCCC”}}

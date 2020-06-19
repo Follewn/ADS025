@@ -1,0 +1,262 @@
+1. Crie o modelo NoSQL orientado a documentos para os seguintes modelos relacionais.
+
+a) 
+Projeto (numero_projeto*, nome_projeto, data_inicio_projeto, numero_gerente)
+Projeto_Empregado (numero_projeto*, numero_empregado*, horas_trabalhadas_projeto)
+Empregado (numero_empregado*, nome_empregado, numero_depto)
+Gerente (numero_gerente*, nome_gerente)
+Departamento (numero_depto*, nome_depto)
+
+	RESPOSTA:
+
+{
+
+    projeto: {
+
+        id: 1,
+
+            numero_projeto: 000000,
+
+                nome_projeto: " AAAAAA ",
+
+                    data_inicio_projeto: “05/10/1999”,
+
+        horas_trabalhadas_projeto: “48h”
+
+    },
+
+    empregado: {
+
+        id: 2
+
+        numero_empregado: 000000,
+
+            nome_empregado: “BBBBBB”
+
+    },
+
+    gerente: {
+
+        id: 3
+
+        numero_gerente: 2222,
+
+            nome_gerente: “CCCCCCC”
+
+    },
+
+    Departamento: {
+
+        id: 4
+
+        numero_depto: 555555,
+
+            nome_depto: DDDDDD
+
+        }
+
+
+b)
+Pedido (cod_pedido*, dat_emissao, cod_fornecedor, vlr_total_pedido)
+Pedido_Material (cod_pedido*, cod_material*, qtd_pedido, vlr_total_material)
+Material (cod_material*, dsc_material, vlr_unitario),
+Fornecedor (cod_fornecedor*, nom_fornecedor, end_fornecedor)
+
+RESPOSTA:
+
+{
+
+    pedido: {
+
+        id: 1,
+
+            cod_pedido: 000000,
+
+                vlr_total_pedido: “480,95”,
+
+                   dat_emissao: “05/10/1999”
+
+    },
+
+    pedido_material: {
+
+        id: 2,
+
+            qtd_pedido: 512,
+
+                vlr_total_material: “328,53”
+
+    },
+
+    material: {
+
+        id: 3,
+
+            cod_pedido: 000000,
+
+                cod_material: 4444,
+
+                    dsc_material: “CCCCCCC”,
+
+                       vlr_unitario: “25,80”
+
+    }
+
+    fornecedor: {
+
+        cod_fornecedor: 2222,
+
+            nome_fornecedor: “AAAAAA”,
+
+                end_fornecedor: “DDDDDD “
+
+    }
+
+}
+
+c)
+Turma (codigo_aluno*, cod_curso*, data_matricula)
+Aluno (codigo_aluno*, nome_aluno, email_aluno, fone_contato)
+Curso (cod_curso*, nome_curso)
+
+	RESPOSTA:
+
+{
+
+    turma: {
+
+        id: 1,
+
+            curso : {
+
+            id: 3,
+
+                codigo_curso: 2222,
+
+                    nome_curso: " CCCCCCC "
+
+        },
+
+        aluno: {
+
+            id: 2,
+
+                codigo_aluno: 000000,
+
+                    nome_aluno: " AAAAAA ",
+
+                        email_aluno: "aaaaaa@com",
+
+                            fone_contato: "9999-9999"
+
+        },
+
+        data_matricula: "05/10/1999"
+
+    }
+
+}
+
+d)
+Consulta (num_paciente*,  data_consulta*, cod_medico*, dsc_diagnostico)
+Paciente (num_paciente*, nome_paciente)
+Medico (cod_medico*, nome_medico, cod_especialidade)
+Especialidade (cod_especialidade*, dsc_especialidade)
+
+	RESPOSTA:
+
+{
+
+    Consulta: {
+
+        id: 1,
+
+            data_consulta: “15/09/1999”,
+
+    },
+
+    paciente: {
+
+        id: 2,
+
+            num_paciente: 000000,
+
+                nome_paciente: “AAAAAA”
+
+        dsc_diagnostico: “CCCCCCC”
+
+    }
+
+    medico: {
+
+        id: 3
+
+        cod_medico: 2222,
+
+            nome_medico: “DDDDDD”,
+
+        especialidade: {
+
+            id: 4
+
+            cod_especialidade: 4444,
+
+                dsc_especialidade: “BBBBBB”
+
+        }
+
+    }
+
+e)
+Emprestimo (num_matricula*, num_isbn*, dat_emprestimo*, dat_devolucao)
+Aluno (num_matricula*, nom_aluno)
+Livro (num_isbn*, tit_livro, num_paginas, cod_editora)
+Editora (cod_editora*, nom_editora)
+
+	RESPOSTA:
+
+{
+
+    emprestimo: {
+
+        id: 1,
+
+            dat_emprestimo: “19/08/2000”,
+
+        dat_devolucao: “08/11/2000”
+
+    },
+
+    aluno: {
+
+        id: 2,
+
+            num_matricula: 00000,
+
+                nom_aluno: “AAAAAA”
+
+    },
+
+    livro: {
+
+        id: 3,
+
+            num_isbn: 2222,
+
+                tit_livro: “CCCCCCC”,
+
+                num_paginas: 888,
+
+            editora: {
+
+            id: 4,
+
+                cod_editora: 4444
+
+            nom_editora: “DDDDDD”
+
+        }
+
+    }
+
+}
